@@ -15,30 +15,34 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //finds the characterController
         player = gameObject.GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //transform.rotation = Quaternion.Euler(0f,playerRotation.y,0f);
-
-        //transform.Rotate(playerRotation);
-        //playerMovement = transform.TransformDirection(playerMovement);
+        //gravity caluations
         velocity.y = gravity * Time.deltaTime;
-        player.transform.Rotate(Vector3.up * playerMovement.x);
+        
+        // Handles turning of the player
+        player.transform.Rotate(Vector3.up * playerRotation.y);
 
+        // Updates the player to move forward based on where it's facing
         Vector3 movement = player.transform.forward * playerMovement.z;
 
+        // keeps player on the ground
         player.Move(velocity);
 
+        // moves the player
         player.Move(speed * Time.deltaTime * movement);
         
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        playerMovement.z = context.ReadValue<Vector2>().y;
-        playerMovement.x = context.ReadValue<Vector2>().x;
-        //playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
+        // gets the players input 
+        playerMovement = new Vector3(0f, 0f, context.ReadValue<Vector2>().y);
+        playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
+
     }
 }
