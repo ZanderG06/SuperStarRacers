@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     Vector3 velocity;
     public float gravity = -9.15f;
 
-    public Vector3 minRotation = new Vector3(0, -0.5f, 0);
-    public Vector3 maxRotation = new Vector3(0, 0.5f, 0);
+    public Vector3 minRotation = new Vector3(0, -45f, 0);
+    public Vector3 maxRotation = new Vector3(0, 45f, 0);
 
     public float currentRotation;
 
@@ -46,7 +46,14 @@ public class PlayerController : MonoBehaviour
 
             
         }
+        if(test)
+        {
+            minRotation.y = gameObject.transform.rotation.y - 45f;
+            maxRotation.y = player.transform.rotation.y + 45f;
+            test = false;
+        }
         
+
 
 
         // Updates the player to move forward based on where it's facing
@@ -64,12 +71,11 @@ public class PlayerController : MonoBehaviour
         playerMovement = new Vector3(0f, 0f, context.ReadValue<Vector2>().y);
         playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
 
-        if (context.canceled)
+        if (context.ReadValue<Vector2>().x == 0)
         {
-            minRotation.y = currentRotation - 0.5f;
-            maxRotation.y = currentRotation + 0.5f;
+            test = true;
 
-            if (maxRotation.y > 1) maxRotation.y = 1;
+            //if (maxRotation.y > 1) maxRotation.y = 1;
             
 
             /*

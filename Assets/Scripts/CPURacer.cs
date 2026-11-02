@@ -32,7 +32,7 @@ public class CPURacer : MonoBehaviour
         if (other.gameObject.CompareTag("Respawn"))
         {
             Debug.Log("it works");
-            currentTargetIndex = 1;
+            currentTargetIndex += 1;
         }
             
     }
