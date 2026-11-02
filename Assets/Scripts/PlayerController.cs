@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 playerMovement = new Vector3 (0f,0f,0f);
     [SerializeField] private Vector3 playerRotation = new Vector3(0f, 0f, 0f);
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,13 +35,11 @@ public class PlayerController : MonoBehaviour
 
         // moves the player
         player.Move(speed * Time.deltaTime * movement);
-        
     }
     public void OnMove(InputAction.CallbackContext context)
     {
         // gets the players input 
         playerMovement = new Vector3(0f, 0f, context.ReadValue<Vector2>().y);
         playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
-
     }
 }
