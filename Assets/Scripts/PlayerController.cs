@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     Vector3 velocity;
     public float gravity = -9.15f;
 
-    public Vector3 minRotation = new Vector3(0, -45f, 0);
-    public Vector3 maxRotation = new Vector3(0, 45f, 0);
+    public float minRotation = -45f;
+    public float maxRotation = 45f;
 
     public float currentRotation;
 
@@ -30,29 +30,56 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //gravity caluations
-        velocity.y = gravity * Time.deltaTime;
+        
+
+        
+
+
+            
+            //gravity caluations
+            velocity.y = gravity * Time.deltaTime;
+
+
+        currentRotation = transform.localEulerAngles.y;
+        if (currentRotation > 180)
+        {
+            currentRotation -= 360;
+        }
+        
+            
+
+        if (currentRotation >= minRotation)
+        {
+            if (currentRotation <= maxRotation)
+            {
+                player.transform.Rotate(Vector3.up * playerRotation.y * Time.deltaTime * rotationSpeed);
+            }
+        }
+
+
+
+
 
         // Handles turning of the player
         //currentRotation <= maxRotation
-        if (currentRotation >= minRotation.y)
-        {
-            if(currentRotation <= maxRotation.y)
-            {
-                player.transform.Rotate(Vector3.up * playerRotation.y * Time.deltaTime * rotationSpeed);
-                currentRotation = player.transform.rotation.y;
-            }
-            
+        //if (currentRotation >= minRotation.y)
+        //{
+        //    if(currentRotation <= maxRotation.y)
+        //    {
+        //        player.transform.Rotate(Vector3.up * playerRotation.y * Time.deltaTime * rotationSpeed);
+        //        currentRotation = player.transform.rotation.y;
+        //    }
 
-            
-        }
-        if(test)
-        {
-            minRotation.y = gameObject.transform.rotation.y - 45f;
-            maxRotation.y = player.transform.rotation.y + 45f;
-            test = false;
-        }
-        
+
+
+        //}
+        //if(test)
+        //{
+        //    minRotation.y = gameObject.transform.rotation.y - 45f;
+        //    maxRotation.y = player.transform.rotation.y + 45f;
+        //    test = false;
+        //}
+
 
 
 
@@ -71,24 +98,33 @@ public class PlayerController : MonoBehaviour
         playerMovement = new Vector3(0f, 0f, context.ReadValue<Vector2>().y);
         playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
 
-        if (context.ReadValue<Vector2>().x == 0)
+
+
+        if(context.ReadValue<Vector2>().x == 0)
         {
-            test = true;
-
-            //if (maxRotation.y > 1) maxRotation.y = 1;
-            
-
-            /*
-            if(maxRotation == 0.5f)
-            {
-                maxRotation = 1f;
-            }
-            else if(maxRotation == 1f)
-            {
-                maxRotation = 0.5f;
-            }*/
-            
-            Debug.Log("hi");
+            //currentRotation = transform.localEulerAngles.y;
+            maxRotation = currentRotation + 45;
+            minRotation = currentRotation - 45;
         }
+        
+        //if (context.ReadValue<Vector2>().x == 0)
+        //{
+        //    test = true;
+
+        //    //if (maxRotation.y > 1) maxRotation.y = 1;
+            
+
+        //    /*
+        //    if(maxRotation == 0.5f)
+        //    {
+        //        maxRotation = 1f;
+        //    }
+        //    else if(maxRotation == 1f)
+        //    {
+        //        maxRotation = 0.5f;
+        //    }*/
+            
+        //    Debug.Log("hi");
+        //}
     }
 }
