@@ -6,14 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
     public float rotationSpeed = 190f;
-    Vector3 velocity;
     public float gravity = -9.15f;
-
     public float minRotation = -45f;
     public float maxRotation = 45f;
-
     public float currentRotation;
 
+    Vector3 velocity;
     bool test = false;
 
     [SerializeField] private CharacterController player;
@@ -29,24 +27,15 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
-
-        
-
-
-            
-            //gravity caluations
-            velocity.y = gravity * Time.deltaTime;
-
+    {  
+        //gravity caluations
+        velocity.y = gravity * Time.deltaTime;
 
         currentRotation = transform.localEulerAngles.y;
         if (currentRotation > 180)
         {
             currentRotation -= 360;
         }
-        
-            
 
         if (currentRotation >= minRotation)
         {
@@ -55,10 +44,6 @@ public class PlayerController : MonoBehaviour
                 player.transform.Rotate(Vector3.up * playerRotation.y * Time.deltaTime * rotationSpeed);
             }
         }
-
-
-
-
 
         // Handles turning of the player
         //currentRotation <= maxRotation
@@ -80,9 +65,6 @@ public class PlayerController : MonoBehaviour
         //    test = false;
         //}
 
-
-
-
         // Updates the player to move forward based on where it's facing
         Vector3 movement = player.transform.forward * playerMovement.z;
 
@@ -98,8 +80,6 @@ public class PlayerController : MonoBehaviour
         playerMovement = new Vector3(0f, 0f, context.ReadValue<Vector2>().y);
         playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
 
-
-
         if(context.ReadValue<Vector2>().x == 0)
         {
             //currentRotation = transform.localEulerAngles.y;
@@ -112,7 +92,6 @@ public class PlayerController : MonoBehaviour
         //    test = true;
 
         //    //if (maxRotation.y > 1) maxRotation.y = 1;
-            
 
         //    /*
         //    if(maxRotation == 0.5f)

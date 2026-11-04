@@ -34,6 +34,5 @@ public class CPURacer : MonoBehaviour
             Debug.Log("it works");
             currentTargetIndex += 1;
         }
-            
     }
 }
