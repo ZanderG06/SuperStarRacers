@@ -791,8 +791,8 @@ MonoBehaviour:
   speed: 5
   rotationSpeed: 190
   gravity: -9.15
-  minRotation: -45
-  maxRotation: 45
+  minRotation: -90
+  maxRotation: 90
   currentRotation: 0
   player: {fileID: 0}
   playerMovement: {x: 0, y: 0, z: 0}

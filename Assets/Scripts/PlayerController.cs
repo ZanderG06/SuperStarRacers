@@ -4,11 +4,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    bool isDrifting = false;
     public float speed = 5f;
     public float rotationSpeed = 190f;
     public float gravity = -9.15f;
-    public float minRotation = -45f;
-    public float maxRotation = 45f;
+    public float minRotation = -90f;
+    public float maxRotation = 90f;
     public float currentRotation;
 
     Vector3 velocity;
@@ -83,8 +84,12 @@ public class PlayerController : MonoBehaviour
         if(context.ReadValue<Vector2>().x == 0)
         {
             //currentRotation = transform.localEulerAngles.y;
-            maxRotation = currentRotation + 45;
-            minRotation = currentRotation - 45;
+            if (!isDrifting)
+            {
+                maxRotation = currentRotation + 90;
+                minRotation = currentRotation - 90;
+            }
+            
         }
         
         //if (context.ReadValue<Vector2>().x == 0)
@@ -105,5 +110,24 @@ public class PlayerController : MonoBehaviour
             
         //    Debug.Log("hi");
         //}
+    }
+    public void OnDrift(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log(context);
+            maxRotation = 180;
+            minRotation = -180;
+            isDrifting = true;
+            rotationSpeed = rotationSpeed / 2f;
+        }
+        if (context.canceled)
+        {
+            maxRotation = currentRotation + 90;
+            minRotation = currentRotation - 90;
+            isDrifting = false;
+            rotationSpeed = rotationSpeed * 2f;
+        }
+        
     }
 }
