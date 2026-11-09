@@ -5,15 +5,17 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     bool isDrifting = false;
-    public float speed = 5f;
+    bool isMovingForward;
+    public float speed = 0f;
     public float rotationSpeed = 190f;
     public float gravity = -9.15f;
     public float minRotation = -90f;
     public float maxRotation = 90f;
     public float currentRotation;
-
+    public float acceleraction = 2f;
+    public float Deceleraction = 2f;
+    float maxSpeed = 10f;
     Vector3 velocity;
-    bool test = false;
 
     [SerializeField] private CharacterController player;
     [SerializeField] private Vector3 playerMovement = new Vector3 (0f,0f,0f);
@@ -28,7 +30,23 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {  
+    {
+        if (isMovingForward)
+        {
+            speed += Time.deltaTime * acceleraction;
+            if(speed >= maxSpeed)
+            {
+                speed = maxSpeed;
+            }
+        }
+        else
+        {
+            speed -= Time.deltaTime * Deceleraction;
+            if (speed <= 0)
+            {
+                speed = 0;
+            }
+        }
         //gravity caluations
         velocity.y = gravity * Time.deltaTime;
 
@@ -89,9 +107,16 @@ public class PlayerController : MonoBehaviour
                 maxRotation = currentRotation + 90;
                 minRotation = currentRotation - 90;
             }
-            
         }
-        
+        if(context.ReadValue<Vector2>().y >= 0)
+        {
+            isMovingForward = true;
+        }
+        if (context.ReadValue<Vector2>().y <= 0)
+        {
+            isMovingForward = false;
+        }
+
         //if (context.ReadValue<Vector2>().x == 0)
         //{
         //    test = true;
@@ -107,7 +132,7 @@ public class PlayerController : MonoBehaviour
         //    {
         //        maxRotation = 0.5f;
         //    }*/
-            
+
         //    Debug.Log("hi");
         //}
     }
@@ -128,6 +153,5 @@ public class PlayerController : MonoBehaviour
             isDrifting = false;
             rotationSpeed = rotationSpeed * 2f;
         }
-        
     }
 }
