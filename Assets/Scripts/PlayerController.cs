@@ -16,10 +16,11 @@ public class PlayerController : MonoBehaviour
     public float currentRotation;
     public float acceleraction = 2f;
     public float Deceleraction = 2f;
-    float maxSpeed = 10f;
+    public float maxSpeed = 10f;
     Vector3 velocity;
 
     bool[] checkpoints = new bool[4];
+    public PickupRotator test;
 
     [SerializeField] private CharacterController player;
     [SerializeField] private Vector3 playerMovement = new Vector3 (0f,0f,0f);
@@ -189,5 +190,8 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Race Finished");
             }
         }
+    public void Interact(InputAction.CallbackContext context)
+    {
+        test.MyIntract();
     }
 }
