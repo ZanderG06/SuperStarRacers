@@ -1,9 +1,11 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class PlayerController : MonoBehaviour
 {
+    public int currentLap;
     bool isDrifting = false;
     bool isMovingForward;
     public float speed = 0f;
@@ -16,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public float Deceleraction = 2f;
     float maxSpeed = 10f;
     Vector3 velocity;
+
+    bool[] checkpoints = new bool[4];
 
     [SerializeField] private CharacterController player;
     [SerializeField] private Vector3 playerMovement = new Vector3 (0f,0f,0f);
@@ -97,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         // gets the players input 
         playerMovement = new Vector3(0f, 0f, context.ReadValue<Vector2>().y);
-        playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
+        if (context.ReadValue<Vector2>().y != 0f) playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
 
         if(context.ReadValue<Vector2>().x == 0)
         {
@@ -152,6 +156,38 @@ public class PlayerController : MonoBehaviour
             minRotation = currentRotation - 90;
             isDrifting = false;
             rotationSpeed = rotationSpeed * 2f;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Respawn"))
+        {
+            if (other.gameObject.name == "Turn1") checkpoints[0] = true;
+            if (other.gameObject.name == "Turn2") checkpoints[1] = true;
+            if (other.gameObject.name == "Turn3") checkpoints[2] = true;
+            if (other.gameObject.name == "Turn4") checkpoints[3] = true;
+        }
+        if(other.gameObject.CompareTag("Finish"))
+        {
+            int checkpointsCompleted = 0;
+            for(int i = 0; i < checkpoints.Length; i++)
+            {
+                if(checkpoints[i] == false) return;
+
+                checkpointsCompleted++;
+            }
+
+            if(checkpointsCompleted == checkpoints.Length)
+            {
+                currentLap++;
+
+                checkpoints = new bool[4]; //Resets all to false
+            }
+            if(currentLap >= 3)
+            {
+                Debug.Log("Race Finished");
+            }
         }
     }
 }
