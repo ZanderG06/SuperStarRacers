@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PickupRotator : MonoBehaviour
+public class PickupRotator : MonoBehaviour, IMyIntract
 {
     public PlayerController player;
     // Update is called once per frame
+    void Start()
+    {
+        
+    }
     void Update()
     {
         transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
@@ -15,9 +19,19 @@ public class PickupRotator : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            
+            //gameObject.TryGetComponent<IMyIntract>(out IMyIntract interactable);
+
+            //interactable.MyIntract();
+
             player = other.gameObject.GetComponent<PlayerController>();
-            player.speed += 10;
+            
             gameObject.SetActive(false);
         }
+    }
+    public void MyIntract()
+    {
+        player.maxSpeed += 10;
+
     }
 }

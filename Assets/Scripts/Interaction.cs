@@ -1,0 +1,4 @@
+interface IMyIntract
+{
+    void MyIntract();
+}
