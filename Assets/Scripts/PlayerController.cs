@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         //finds the characterController
         player = gameObject.GetComponent<CharacterController>();
+        currentLap = 1;
     }
 
     // Update is called once per frame
@@ -165,10 +166,10 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Respawn"))
         {
-            if (other.gameObject.name == "Turn1") checkpoints[0] = true;
-            if (other.gameObject.name == "Turn2") checkpoints[1] = true;
-            if (other.gameObject.name == "Turn3") checkpoints[2] = true;
-            if (other.gameObject.name == "Turn4") checkpoints[3] = true;
+            if (other.gameObject.name == "CheckPoint(1)") checkpoints[0] = true;
+            if (other.gameObject.name == "CheckPoint(2)") checkpoints[1] = true;
+            if (other.gameObject.name == "CheckPoint(3)") checkpoints[2] = true;
+            if (other.gameObject.name == "CheckPoint(4)") checkpoints[3] = true;
         }
         if (other.gameObject.CompareTag("Finish"))
         {

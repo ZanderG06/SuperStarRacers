@@ -5,6 +5,8 @@ public class CPURacer : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
     public Transform target;
+    public CPURacer[] instance;
+    public GameObject[] enemies;
 
     public int currentTargetIndex = 0;
     public GameObject[] checkpoints;
@@ -12,6 +14,8 @@ public class CPURacer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+         
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -20,11 +24,22 @@ public class CPURacer : MonoBehaviour
     {
         navMeshAgent.SetDestination(checkpoints[currentTargetIndex].transform.position);
 
+        
+
         /*
         if(target != null)
         {
             navMeshAgent.SetDestination(target.transform.position);
         }*/
+        if(Vector3.Distance(this.transform.position, enemies[0].transform.position) <= 1)
+        {
+
+        }
+
+        if(currentTargetIndex >= 3)
+        {
+            currentTargetIndex = 0;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
