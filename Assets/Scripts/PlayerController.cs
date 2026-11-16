@@ -102,7 +102,8 @@ public class PlayerController : MonoBehaviour
     {
         // gets the players input 
         playerMovement = new Vector3(0f, 0f, context.ReadValue<Vector2>().y);
-        if (context.ReadValue<Vector2>().y != 0f) playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
+        //if (context.ReadValue<Vector2>().y != 0f)
+        playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
 
         if(context.ReadValue<Vector2>().x == 0)
         {
@@ -162,34 +163,35 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Respawn"))
+        if (other.gameObject.CompareTag("Respawn"))
         {
             if (other.gameObject.name == "Turn1") checkpoints[0] = true;
             if (other.gameObject.name == "Turn2") checkpoints[1] = true;
             if (other.gameObject.name == "Turn3") checkpoints[2] = true;
             if (other.gameObject.name == "Turn4") checkpoints[3] = true;
         }
-        if(other.gameObject.CompareTag("Finish"))
+        if (other.gameObject.CompareTag("Finish"))
         {
             int checkpointsCompleted = 0;
-            for(int i = 0; i < checkpoints.Length; i++)
+            for (int i = 0; i < checkpoints.Length; i++)
             {
-                if(checkpoints[i] == false) return;
+                if (checkpoints[i] == false) return;
 
                 checkpointsCompleted++;
             }
 
-            if(checkpointsCompleted == checkpoints.Length)
+            if (checkpointsCompleted == checkpoints.Length)
             {
                 currentLap++;
 
                 checkpoints = new bool[4]; //Resets all to false
             }
-            if(currentLap >= 3)
+            if (currentLap >= 3)
             {
                 Debug.Log("Race Finished");
             }
         }
+    }
     public void Interact(InputAction.CallbackContext context)
     {
         test.MyIntract();
