@@ -15,6 +15,7 @@ public class PickupRotator : MonoBehaviour, IMyIntract
     {
         transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
     }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

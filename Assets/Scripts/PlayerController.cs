@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private CharacterController player;
     [SerializeField] private Vector3 playerMovement = new Vector3 (0f,0f,0f);
-    [SerializeField] private Vector3 playerRotation = new Vector3(0f, 0f, 0f);
+    [SerializeField] private Vector3 playerRotation = new Vector3 (0f,0f,0f);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         {
             if (currentRotation <= maxRotation)
             {
-                player.transform.Rotate(Vector3.up * playerRotation.y * Time.deltaTime * rotationSpeed);
+                player.transform.Rotate(playerRotation.y * rotationSpeed * Time.deltaTime * Vector3.up);
             }
         }
 
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        // gets the players input 
+        // gets the players input
         playerMovement = new Vector3(0f, 0f, context.ReadValue<Vector2>().y);
         //if (context.ReadValue<Vector2>().y != 0f)
         playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
@@ -151,14 +151,14 @@ public class PlayerController : MonoBehaviour
             maxRotation = 180;
             minRotation = -180;
             isDrifting = true;
-            rotationSpeed = rotationSpeed / 2f;
+            rotationSpeed /= 2f;
         }
         if (context.canceled)
         {
             maxRotation = currentRotation + 90;
             minRotation = currentRotation - 90;
             isDrifting = false;
-            rotationSpeed = rotationSpeed * 2f;
+            rotationSpeed *= 2f;
         }
     }
 
@@ -191,6 +191,12 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Race Finished");
             }
+        }
+
+        if (other.transform == ServiceHub.Instance.GameManager.checkpoints[ServiceHub.Instance.GameManager.currentCheckpointIndex])
+        {
+            ServiceHub.Instance.GameManager.currentCheckpointIndex++;
+            ServiceHub.Instance.GameManager.playerInFirst = gameObject;
         }
     }
     public void Interact(InputAction.CallbackContext context)

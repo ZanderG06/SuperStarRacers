@@ -24,8 +24,6 @@ public class CPURacer : MonoBehaviour
     {
         navMeshAgent.SetDestination(checkpoints[currentTargetIndex].transform.position);
 
-        
-
         /*
         if(target != null)
         {
@@ -48,6 +46,12 @@ public class CPURacer : MonoBehaviour
         {
             Debug.Log("it works");
             currentTargetIndex += 1;
+        }
+
+        if (other.transform == ServiceHub.Instance.GameManager.checkpoints[ServiceHub.Instance.GameManager.currentCheckpointIndex])
+        {
+            ServiceHub.Instance.GameManager.currentCheckpointIndex++;
+            ServiceHub.Instance.GameManager.playerInFirst = gameObject;
         }
     }
 }
