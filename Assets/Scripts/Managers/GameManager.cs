@@ -1,10 +1,15 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
     public Transform[] racers;
     public Transform[] checkpoints;
     public int currentCheckpointIndex;
+
+    
     
     public GameObject playerInFirst = null;
     public GameObject playerInSecond = null;
@@ -37,4 +42,6 @@ public class GameManager : MonoBehaviour
         playerInFirst = racers[closestRacerIndex].gameObject;
         
     }
+
+    
 }
