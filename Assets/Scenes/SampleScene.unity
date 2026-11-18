@@ -119,6 +119,69 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &92140341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 92140343}
+  - component: {fileID: 92140342}
+  m_Layer: 0
+  m_Name: test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &92140342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92140341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7046d0e015bc64f4885d142fca749179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarProgress
+  racers:
+  - {fileID: 1110919667}
+  - {fileID: 1241960068}
+  - {fileID: 572479997}
+  - {fileID: 1075237849}
+  checkpoints:
+  - {fileID: 2132980123}
+  - {fileID: 1510165144}
+  - {fileID: 577195401}
+  - {fileID: 2141425106}
+  - {fileID: 1516703497}
+  - {fileID: 1230919995}
+  - {fileID: 824017075}
+  - {fileID: 2100091637}
+  - {fileID: 471543956}
+  currentCheckpointIndex: 0
+  playerPosition: 0
+  cars: []
+  racerDistances: []
+--- !u!4 &92140343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92140341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.28317, y: 0.378, z: -4.92795}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175359424
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,8 +353,11 @@ MonoBehaviour:
   - {fileID: 2100091637}
   - {fileID: 824017075}
   - {fileID: 471543956}
-  playerInFirst: {fileID: 0}
   currentCheckpointIndex: 0
+  playerInFirst: {fileID: 0}
+  playerInSecond: {fileID: 0}
+  playerInThird: {fileID: 0}
+  playerInFourth: {fileID: 0}
 --- !u!1 &471543955
 GameObject:
   m_ObjectHideFlags: 0
@@ -3924,7 +3990,7 @@ Transform:
   m_GameObject: {fileID: 2132980122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 64.15609, y: 0.7399999, z: 37.94539}
+  m_LocalPosition: {x: 66, y: 0.7399999, z: 37.94539}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4193,3 +4259,4 @@ SceneRoots:
   - {fileID: 890140322}
   - {fileID: 822318359}
   - {fileID: 812622113}
+  - {fileID: 92140343}
