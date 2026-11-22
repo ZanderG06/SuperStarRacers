@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using System;
 
+
 public class CarProgress : MonoBehaviour
 {
     public Transform[] racers;
