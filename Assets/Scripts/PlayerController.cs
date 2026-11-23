@@ -1,11 +1,11 @@
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 public class PlayerController : MonoBehaviour
 {
     public int currentLap;
+    public TMP_Text lapUI;
     bool isDrifting = false;
     bool isMovingForward;
     public float speed = 0f;
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
             minRotation = currentRotation - 90;
             isDrifting = false;
             rotationSpeed *= 2f;
-            Debug.Log("Stoped drifting");
+            Debug.Log("Stopped drifting");
         }
     }
 
@@ -186,6 +186,7 @@ public class PlayerController : MonoBehaviour
             if (checkpointsCompleted == checkpoints.Length)
             {
                 currentLap++;
+                lapUI.text = $"Lap {currentLap}/3";
 
                 checkpoints = new bool[4]; //Resets all to false
             }
