@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using TMPro;
 
 
 public class CarProgress : MonoBehaviour
@@ -10,6 +12,7 @@ public class CarProgress : MonoBehaviour
     public Transform[] checkpoints;
     public int currentCheckpointIndex;
     public int playerPosition;
+    public TMP_Text positionText;
 
     public List<Transform> cars = new List<Transform>();
 
@@ -50,6 +53,7 @@ public class CarProgress : MonoBehaviour
             }
         }
 
+        positionText.text = ($"{playerPosition}/4");
        // playerInFirst = racers[closestRacerIndex].gameObject;
 
     }
