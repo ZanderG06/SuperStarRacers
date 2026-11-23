@@ -16,10 +16,7 @@ public class CarProgress : MonoBehaviour
 
     public List<Transform> cars = new List<Transform>();
 
-    //public GameObject playerInFirst = null;
-    //public GameObject playerInSecond = null;
-    //public GameObject playerInThird = null;
-    //public GameObject playerInFourth = null;
+    
     public float[] racerDistances;
 
     private void FixedUpdate()
@@ -29,7 +26,7 @@ public class CarProgress : MonoBehaviour
         for (int i = 0; i < racers.Length; i++)
         {
             racerDistances[i] = Vector3.Distance(checkpoints[currentCheckpointIndex].position, racers[i].position);
-            
+
         }
         Array.Sort(racerDistances);
 

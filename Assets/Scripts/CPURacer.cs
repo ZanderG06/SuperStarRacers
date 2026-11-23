@@ -48,10 +48,10 @@ public class CPURacer : MonoBehaviour
             currentTargetIndex += 1;
         }
 
-        if (other.transform == ServiceHub.Instance.GameManager.checkpoints[ServiceHub.Instance.GameManager.currentCheckpointIndex])
+        if (other.transform == ServiceHub.Instance.CarProgress.checkpoints[ServiceHub.Instance.CarProgress.currentCheckpointIndex])
         {
-            ServiceHub.Instance.GameManager.currentCheckpointIndex++;
-            ServiceHub.Instance.GameManager.playerInFirst = gameObject;
+            ServiceHub.Instance.CarProgress.currentCheckpointIndex += 1;
+            
         }
     }
 }

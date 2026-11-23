@@ -152,6 +152,7 @@ public class PlayerController : MonoBehaviour
             minRotation = -180;
             isDrifting = true;
             rotationSpeed /= 2f;
+            Debug.Log("drifting");
         }
         if (context.canceled)
         {
@@ -159,6 +160,7 @@ public class PlayerController : MonoBehaviour
             minRotation = currentRotation - 90;
             isDrifting = false;
             rotationSpeed *= 2f;
+            Debug.Log("Stoped drifting");
         }
     }
 
@@ -193,10 +195,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (other.transform == ServiceHub.Instance.GameManager.checkpoints[ServiceHub.Instance.GameManager.currentCheckpointIndex])
+        if (other.transform == ServiceHub.Instance.CarProgress.checkpoints[ServiceHub.Instance.CarProgress.currentCheckpointIndex])
         {
-            ServiceHub.Instance.GameManager.currentCheckpointIndex++;
-            ServiceHub.Instance.GameManager.playerInFirst = gameObject;
+            ServiceHub.Instance.CarProgress.currentCheckpointIndex += 1;
+           
         }
     }
     public void Interact(InputAction.CallbackContext context)
