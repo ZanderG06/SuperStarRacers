@@ -4,8 +4,13 @@ public class ServiceHub : MonoBehaviour
 {
     public static ServiceHub Instance { get; private set; }
 
+    
+
     [Header("System References")]
     [SerializeField] private CarProgress carProgress;
+    [SerializeField] private PointSystem pointSystem;
+
+    public PointSystem PointSystem => pointSystem;
 
     public CarProgress CarProgress => carProgress;
 

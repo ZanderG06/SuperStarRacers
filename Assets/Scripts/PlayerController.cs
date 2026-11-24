@@ -193,6 +193,7 @@ public class PlayerController : MonoBehaviour
             if (currentLap >= 3)
             {
                 Debug.Log("Race Finished");
+                ServiceHub.Instance.PointSystem.CheckPoints();
             }
         }
 
