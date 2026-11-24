@@ -16,6 +16,7 @@ public class PointSystem : MonoBehaviour
     {
         finishUI = GameObject.Find("finishUI");
         pointsUi = GameObject.Find("Points").GetComponent<TMP_Text>();
+        finishUI.active = false;
     }
 
     // Update is called once per frame
