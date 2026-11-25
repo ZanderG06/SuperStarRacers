@@ -115,13 +115,13 @@ public class PlayerController : MonoBehaviour
         //if (context.ReadValue<Vector2>().y != 0f)
         playerRotation = new Vector3(0f, context.ReadValue<Vector2>().x, 0f);
 
-        if(context.ReadValue<Vector2>().x == 0)
+        if(playerRotation.y < 1 && playerRotation.y > -1)
         {
             //currentRotation = transform.localEulerAngles.y;
             if (!isDrifting)
             {
-                maxRotation = currentRotation + 90;
-                minRotation = currentRotation - 90;
+                maxRotation = currentRotation + 120;
+                minRotation = currentRotation - 120;
             }
         }
 
