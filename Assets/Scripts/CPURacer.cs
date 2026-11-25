@@ -11,7 +11,6 @@ public class CPURacer : MonoBehaviour
     public int currentTargetIndex = 0;
     public GameObject[] checkpoints;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -19,7 +18,6 @@ public class CPURacer : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         navMeshAgent.SetDestination(checkpoints[currentTargetIndex].transform.position);
@@ -51,7 +49,6 @@ public class CPURacer : MonoBehaviour
         if (other.transform == ServiceHub.Instance.CarProgress.checkpoints[ServiceHub.Instance.CarProgress.currentCheckpointIndex])
         {
             ServiceHub.Instance.CarProgress.currentCheckpointIndex += 1;
-            
         }
     }
 }

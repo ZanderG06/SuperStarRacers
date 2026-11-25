@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class PointSystem : MonoBehaviour
 {
@@ -10,19 +10,11 @@ public class PointSystem : MonoBehaviour
     [SerializeField]private GameObject finishUI;
     [SerializeField] private TMP_Text pointsUi;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         finishUI = GameObject.Find("finishUI");
         pointsUi = GameObject.Find("Points").GetComponent<TMP_Text>();
-        finishUI.active = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        finishUI.SetActive(false);
     }
 
     public void CheckPoints()
@@ -32,15 +24,25 @@ public class PointSystem : MonoBehaviour
             finishUI = GameObject.Find("finishUI");
             pointsUi = GameObject.Find("Points").GetComponent<TMP_Text>();
         }
-        
-            if (ServiceHub.Instance.CarProgress.playerPosition == 1)
-            {
-                finishUI.active = true;
+
+        finishUI.SetActive(true);
+        switch (ServiceHub.Instance.CarProgress.playerPosition)
+        {
+            case 1: //1st
+                playerPoints += 9;
+                break;
+            case 2: //2nd
+                playerPoints += 6;
+                break;
+            case 3: //3rd
+                playerPoints += 3;
+                break;
+            default: //4th or below
                 playerPoints += 1;
-                pointsUi.text = $"{playerPoints}Pts";
-            }
-        
+                break;
+        }
+
+        pointsUi.text = $"{playerPoints}Pts";
         Debug.Log(playerPoints);
-        
     }
 }

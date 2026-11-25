@@ -5,8 +5,6 @@ public class GameManager : MonoBehaviour
     public Transform[] racers;
     public Transform[] checkpoints;
     public int currentCheckpointIndex;
-
-    
     
     public GameObject playerInFirst = null;
     public GameObject playerInSecond = null;
@@ -22,9 +20,9 @@ public class GameManager : MonoBehaviour
         }
 
         int closestRacerIndex = 0;
-        int secondRacerIndex = 0;
-        int thirdRacerIndex = 0;
-        int fourthRacerIndex = 0;
+        //int secondRacerIndex = 0;
+        //int thirdRacerIndex = 0;
+        //int fourthRacerIndex = 0;
 
         float closestDistance = racerDistances[0];
         for (int i = 1; i < racerDistances.Length; i++)
@@ -37,8 +35,5 @@ public class GameManager : MonoBehaviour
         }
 
         playerInFirst = racers[closestRacerIndex].gameObject;
-        
     }
-
-    
 }

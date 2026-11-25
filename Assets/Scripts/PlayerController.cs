@@ -15,8 +15,11 @@ public class PlayerController : MonoBehaviour
     public float maxRotation = 90f;
     public float currentRotation;
     public float acceleraction = 2f;
-    public float Deceleraction = 2f;
+    public float deceleraction = 2f;
     public float maxSpeed = 10f;
+    public float minFOV = 60f;
+    public float maxFOV = 80f;
+    public float fovChangeSpeed = 1.5f;
     Vector3 velocity;
 
     bool[] checkpoints = new bool[4];
@@ -26,7 +29,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 playerMovement = new Vector3 (0f,0f,0f);
     [SerializeField] private Vector3 playerRotation = new Vector3 (0f,0f,0f);
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //finds the characterController
@@ -34,25 +36,31 @@ public class PlayerController : MonoBehaviour
         currentLap = 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isMovingForward)
         {
-            speed += Time.deltaTime * acceleraction;
-            if(speed >= maxSpeed)
+            speed = Mathf.MoveTowards(speed, maxSpeed, acceleraction * Time.deltaTime);
+
+            if (speed >= maxSpeed)
             {
                 speed = maxSpeed;
             }
+
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, maxFOV, Time.deltaTime * fovChangeSpeed);
         }
         else
         {
-            speed -= Time.deltaTime * Deceleraction;
+            speed = Mathf.MoveTowards(speed, 0f, deceleraction * Time.deltaTime);
+
             if (speed <= 0)
             {
                 speed = 0;
             }
+
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, minFOV, Time.deltaTime * fovChangeSpeed);
         }
+
         //gravity caluations
         velocity.y = gravity * Time.deltaTime;
 
@@ -91,7 +99,7 @@ public class PlayerController : MonoBehaviour
         //}
 
         // Updates the player to move forward based on where it's facing
-        Vector3 movement = player.transform.forward * playerMovement.z;
+        Vector3 movement = player.transform.forward;
 
         // keeps player on the ground
         player.Move(velocity);
@@ -99,6 +107,7 @@ public class PlayerController : MonoBehaviour
         // moves the player
         player.Move(speed * Time.deltaTime * movement);
     }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         // gets the players input
@@ -115,11 +124,12 @@ public class PlayerController : MonoBehaviour
                 minRotation = currentRotation - 90;
             }
         }
-        if(context.ReadValue<Vector2>().y >= 0)
+
+        if (context.ReadValue<Vector2>().y > 0)
         {
             isMovingForward = true;
         }
-        if (context.ReadValue<Vector2>().y <= 0)
+        else
         {
             isMovingForward = false;
         }
