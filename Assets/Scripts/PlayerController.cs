@@ -7,7 +7,10 @@ public class PlayerController : MonoBehaviour
     public int currentLap;
     public TMP_Text lapUI;
     bool isDrifting = false;
+    Vector3 movement;
+    Vector3 movementTracker;
     bool isMovingForward;
+    bool isMovingBackward;
     public float speed = 0f;
     public float rotationSpeed = 190f;
     public float gravity = -9.15f;
@@ -46,8 +49,23 @@ public class PlayerController : MonoBehaviour
             {
                 speed = maxSpeed;
             }
+            movement = player.transform.forward;
+            movementTracker = movement;
 
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, maxFOV, Time.deltaTime * fovChangeSpeed);
+        }
+        else if (isMovingBackward)
+        {
+            speed = Mathf.MoveTowards(speed, maxSpeed, acceleraction * Time.deltaTime);
+
+            if (speed >= maxSpeed)
+            {
+                speed = maxSpeed;
+            }
+             movement = -player.transform.forward;
+            movementTracker = movement;
+
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, minFOV, Time.deltaTime * fovChangeSpeed);
         }
         else
         {
@@ -57,9 +75,21 @@ public class PlayerController : MonoBehaviour
             {
                 speed = 0;
             }
+            if(movementTracker.z > 0)
+            {
+                movement = player.transform.forward;
+            }
+            if (movementTracker.z < 0)
+            {
+                movement = -player.transform.forward;
+            }
+
+
+
 
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, minFOV, Time.deltaTime * fovChangeSpeed);
         }
+        
 
         //gravity caluations
         velocity.y = gravity * Time.deltaTime;
@@ -99,7 +129,7 @@ public class PlayerController : MonoBehaviour
         //}
 
         // Updates the player to move forward based on where it's facing
-        Vector3 movement = player.transform.forward;
+        
 
         // keeps player on the ground
         player.Move(velocity);
@@ -129,9 +159,14 @@ public class PlayerController : MonoBehaviour
         {
             isMovingForward = true;
         }
+        else if(context.ReadValue<Vector2>().y < 0)
+        {
+            isMovingBackward = true;
+        }
         else
         {
             isMovingForward = false;
+            isMovingBackward = false;
         }
 
         //if (context.ReadValue<Vector2>().x == 0)

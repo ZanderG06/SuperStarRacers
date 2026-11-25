@@ -7,6 +7,7 @@ public class CPURacer : MonoBehaviour
     public Transform target;
     public CPURacer[] instance;
     public GameObject[] enemies;
+    public PickupRotator test;
 
     public int currentTargetIndex = 0;
     public GameObject[] checkpoints;
