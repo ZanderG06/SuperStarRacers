@@ -52,4 +52,8 @@ public class CPURacer : MonoBehaviour
             ServiceHub.Instance.CarProgress.currentCheckpointIndex += 1;
         }
     }
+    public void SetSpeed(float speed)
+    {
+        navMeshAgent.speed = speed;
+    }
 }

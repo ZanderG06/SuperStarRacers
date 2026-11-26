@@ -1,15 +1,20 @@
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PickupRotator : MonoBehaviour, IMyIntract
 {
     public PlayerController player;
     public CPURacer Racers;
 
-    private GameObject objectGame;
+    public GameObject cube;
+
+    public GameObject objectGame;
+
+    float distanceBehind = 2f;
     // speed boost, banaa/stop movement, switch position, blind player and slow oppents
-    int RandomItemNum;
+    public int RandomItemNum;
 
     void Start()
     {
@@ -49,16 +54,53 @@ public class PickupRotator : MonoBehaviour, IMyIntract
     }
     public void MyIntract()
     {
-        RandomItemNum = Random.Range(0, 6);
+        RandomItemNum = 1;
         if(objectGame == gameObject.CompareTag("Enemy"))
         {
-
+            switch (RandomItemNum)
+            {
+                case 1: //1st
+                    Racers.SetSpeed(20);
+                    break;
+                case 2: //2nd
+                    Vector3 spawnPosition = objectGame.transform.position -(objectGame.transform.forward * distanceBehind);
+                    Instantiate(cube, spawnPosition, objectGame.transform.rotation);
+                    break;
+                case 3: //3rd
+                    
+                    break;
+                case 4: //3rd
+                    
+                    break;
+                default: //4th or below
+                   
+                    break;
+            }
         }
-        if(objectGame == gameObject.CompareTag("Player"))
+        else if (objectGame == gameObject.CompareTag("Player"))
         {
-
+            switch (RandomItemNum)
+            { 
+                case 1: //1st
+                    player.maxSpeed += 10;
+                    break;
+                case 2: //2nd
+                    Vector3 spawnPosition = objectGame.transform.position - (objectGame.transform.forward * distanceBehind);
+                    Instantiate(cube, spawnPosition, objectGame.transform.rotation);
+                    break;
+                case 3: //3rd
+                
+                    break;
+                case 4: //3rd
+                
+                    break;
+                default: //4th or below
+                
+                    break;
+            }
         }
-        player.maxSpeed += 10;
-        
+       
+
+
     }
 }
