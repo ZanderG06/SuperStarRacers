@@ -9,11 +9,13 @@ public class StopSpeed : MonoBehaviour
         {
             CPURacer enmey = other.GetComponent<CPURacer>();
             enmey.SetSpeed(0);
+            Destroy(gameObject);
         }
         else if (other.gameObject.CompareTag("Player"))
         {
             PlayerController player = other.GetComponent<PlayerController>();
             player.speed = 0;
+            Destroy(gameObject);
         }
     }
     // Update is called once per frame
