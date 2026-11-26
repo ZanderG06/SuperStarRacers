@@ -11,6 +11,7 @@ public class CarProgress : MonoBehaviour
     public int currentCheckpointIndex;
     public int playerPosition;
     public TMP_Text positionText;
+    float closestDistance;
 
     public List<Transform> cars = new List<Transform>();
 
@@ -32,7 +33,7 @@ public class CarProgress : MonoBehaviour
         
 
 
-        float closestDistance = racerDistances[0];
+         closestDistance = racerDistances[0];
 
         for (int i = 0; i < racerDistances.Length; i++)
         {
@@ -51,5 +52,17 @@ public class CarProgress : MonoBehaviour
         positionText.text = ($"{playerPosition}/4");
        // playerInFirst = racers[closestRacerIndex].gameObject;
 
+    }
+    public void CheckPositon(GameObject racer)
+    {
+        //float checkPosition = Vector3.Distance(checkpoints[currentCheckpointIndex].position, racer.position);
+        //for (int i = 0; racerDistances.Length; i++)
+        //{
+        //    if (checkPosition != closestDistance)
+        //    {
+
+        //    }
+        //}
+        
     }
 }

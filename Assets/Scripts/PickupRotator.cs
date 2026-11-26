@@ -12,13 +12,15 @@ public class PickupRotator : MonoBehaviour, IMyIntract
 
     public GameObject objectGame;
 
+    public GameObject blindObject;
+
     float distanceBehind = 2f;
     // speed boost, banaa/stop movement, switch position, blind player and slow oppents
     public int RandomItemNum;
 
     void Start()
     {
-        
+        blindObject.SetActive(false);
     }
     void Update()
     {
@@ -59,20 +61,20 @@ public class PickupRotator : MonoBehaviour, IMyIntract
         {
             switch (RandomItemNum)
             {
-                case 1: //1st
+                case 1: 
                     Racers.SetSpeed(20);
                     break;
-                case 2: //2nd
+                case 2:
                     Vector3 spawnPosition = objectGame.transform.position -(objectGame.transform.forward * distanceBehind);
                     Instantiate(cube, spawnPosition, objectGame.transform.rotation);
                     break;
-                case 3: //3rd
+                case 3:
+                    Racers.SetSpeed(5);
+                    break;
+                case 4: 
                     
                     break;
-                case 4: //3rd
-                    
-                    break;
-                default: //4th or below
+                default:
                    
                     break;
             }
@@ -81,20 +83,20 @@ public class PickupRotator : MonoBehaviour, IMyIntract
         {
             switch (RandomItemNum)
             { 
-                case 1: //1st
+                case 1:
                     player.maxSpeed += 10;
                     break;
-                case 2: //2nd
+                case 2: 
                     Vector3 spawnPosition = objectGame.transform.position - (objectGame.transform.forward * distanceBehind);
                     Instantiate(cube, spawnPosition, objectGame.transform.rotation);
                     break;
-                case 3: //3rd
-                
+                case 3:
+                    blindObject.SetActive(true);
                     break;
-                case 4: //3rd
-                
+                case 4:
+                    //ServiceHub.Instance.CarProgress;
                     break;
-                default: //4th or below
+                default: 
                 
                     break;
             }
