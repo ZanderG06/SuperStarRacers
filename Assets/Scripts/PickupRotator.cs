@@ -56,6 +56,7 @@ public class PickupRotator : MonoBehaviour, IMyIntract
     }
     public void MyIntract()
     {
+        
         RandomItemNum = 1;
         if(objectGame == gameObject.CompareTag("Enemy"))
         {
@@ -81,6 +82,7 @@ public class PickupRotator : MonoBehaviour, IMyIntract
         }
         else if (objectGame == gameObject.CompareTag("Player"))
         {
+            
             switch (RandomItemNum)
             { 
                 case 1:
@@ -94,7 +96,7 @@ public class PickupRotator : MonoBehaviour, IMyIntract
                     blindObject.SetActive(true);
                     break;
                 case 4:
-                    //ServiceHub.Instance.CarProgress;
+                    ServiceHub.Instance.CarProgress.CheckPositon(objectGame);
                     break;
                 default: 
                 

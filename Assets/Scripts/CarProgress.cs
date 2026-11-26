@@ -20,6 +20,10 @@ public class CarProgress : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(currentCheckpointIndex > 8)
+        {
+            currentCheckpointIndex = 0;
+        }
         
         racerDistances = new float[racers.Length];
         for (int i = 0; i < racers.Length; i++)
@@ -55,13 +59,21 @@ public class CarProgress : MonoBehaviour
     }
     public void CheckPositon(GameObject racer)
     {
-        //float checkPosition = Vector3.Distance(checkpoints[currentCheckpointIndex].position, racer.position);
-        //for (int i = 0; racerDistances.Length; i++)
+        float checkPosition = Vector3.Distance(checkpoints[currentCheckpointIndex].position, racer.transform.position);
+        //for (int i = 0; i < racerDistances.Length; i++)
         //{
-        //    if (checkPosition != closestDistance)
-        //    {
-
-        //    }
+        if (racer.gameObject.CompareTag("Player"))
+        {
+            CharacterController player = racer.GetComponent<CharacterController>();
+            player.enabled = false;
+            racer.transform.position = checkpoints[currentCheckpointIndex].transform.position;
+            player.enabled = true;
+        }
+        else if (checkPosition != closestDistance)
+        {
+            Debug.Log("made it through");
+            racer.transform.position = checkpoints[currentCheckpointIndex].transform.position;
+        }
         //}
         
     }

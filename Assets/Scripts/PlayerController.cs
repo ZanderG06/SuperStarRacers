@@ -75,14 +75,14 @@ public class PlayerController : MonoBehaviour
             {
                 speed = 0;
             }
-            if(movementTracker.z > 0)
-            {
-                movement = player.transform.forward;
-            }
-            if (movementTracker.z < 0)
-            {
-                movement = -player.transform.forward;
-            }
+            //if(movementTracker.z > 0)
+            //{
+            //    movement = -player.transform.forward;
+            //}
+            //if (movementTracker.z < 0)
+            //{
+            //    movement = player.transform.forward;
+            //}
 
 
 
@@ -250,6 +250,10 @@ public class PlayerController : MonoBehaviour
     }
     public void Interact(InputAction.CallbackContext context)
     {
-        test.MyIntract();
+        if (context.started)
+        {
+            test.MyIntract();
+        }
+        
     }
 }
