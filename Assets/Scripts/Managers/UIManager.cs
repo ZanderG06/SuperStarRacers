@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject characterSelect;
     public GameObject trackSelect;
+    public GameObject credits;
 
     public void ChangeUI(int uiIndex)
     {
@@ -18,8 +19,11 @@ public class UIManager : MonoBehaviour
             case 1:
                 characterSelect.SetActive(true);
                 break;
-            default:
+            case 2:
                 trackSelect.SetActive(true);
+                break;
+            default:
+                credits.SetActive(true);
                 break;
         }
     }
@@ -39,5 +43,6 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(false);
         characterSelect.SetActive(false);
         trackSelect.SetActive(false);
+        credits.SetActive(false);
     }
 }
